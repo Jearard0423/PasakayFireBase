@@ -3,26 +3,29 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - main
+      - main   # triggers on pushes to main
 
 jobs:
-  deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
       - name: Deploy to Firebase Hosting
         run: |
-          # Write the service account JSON secret to a file
           echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > "${HOME}/firebase-key.json"
-
-          # Set environment variable so Firebase CLI uses the JSON file
+          # PowerShell on Windows will ignore export; in GitHub Actions (Linux) it's fine
           export GOOGLE_APPLICATION_CREDENTIALS="${HOME}/firebase-key.json"
-
-          # Deploy only hosting
           firebase deploy --project pasakay-project-ph --only hosting
+
+
