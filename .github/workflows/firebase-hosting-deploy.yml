@@ -31,3 +31,4 @@ jobs:
 
           # Deploy only hosting for the specified project
           firebase deploy --project pasakay-project-ph --only hosting
+          #test
