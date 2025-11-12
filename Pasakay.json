@@ -170,7 +170,7 @@
     "role_1": {
       "roleId": "role_1",
       "roleName": "Passenger",
-      "description": "Books rides and provides feedback"
+      "description": "Books rides, provides feedback, rating and pays the driver"
     },
     "role_2": {
       "roleId": "role_2",
